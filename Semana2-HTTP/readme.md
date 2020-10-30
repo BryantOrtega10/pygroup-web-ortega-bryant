@@ -17,3 +17,5 @@ El método OPTIONS es utilizado para describir las opciones de comunicación par
 El método TRACE realiza una prueba de bucle de retorno de mensaje a lo largo de la ruta al recurso de destino.
 ## PATCH
 El método PATCH es utilizado para aplicar modificaciones parciales a un recurso.
+
+## Códigos de respuesta HTTP más comunes
