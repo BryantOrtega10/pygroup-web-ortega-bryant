@@ -19,4 +19,5 @@
     {# ... #} para comentarios no incluidos en la salida de la plantilla
     # ... ## para declaraciones de línea
     
+    Fuente: https://www.tutorialspoint.com/flask/flask_templates.htm
 '''

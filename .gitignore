@@ -139,3 +139,5 @@ cython_debug/
 
 test/
 proyecto_flask/env
+
+.vscode/
