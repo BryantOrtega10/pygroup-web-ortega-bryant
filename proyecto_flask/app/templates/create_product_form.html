@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create product</title>
+    <style>
+        label{
+            width: 90px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        textarea, input[type=text]{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<form method="POST" action="/products/create-product-form">
+    {{ form.csrf_token }}
+    {{ form.name.label }} {{ form.name(size=20) }}<br><br>
+    {{ form.image.label }} {{ form.image(size=20) }}<br><br>
+    {{ form.price.label }} {{ form.price(size=20) }}<br><br>
+    {{ form.weight.label }} {{ form.weight(size=20) }}<br><br>
+    {{ form.description.label }} {{ form.description(size=20, rows='5') }}<br><br>
+    {{ form.refundable.label }} {{ form.refundable }}
+    {{ form.category_id.label }} {{ form.category_id }}<br><br>
+    <input type="submit" value="Create product">
+</form>
+</body>
+</html>
