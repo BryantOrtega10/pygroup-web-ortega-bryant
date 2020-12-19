@@ -93,12 +93,12 @@ def create_new_product(name, image, price, weight, description, refundable, cate
     return None
 
 def create_new_stock(product_id, quantity):
-
-
-    stock = Stock(product_id=product_id, quantity=quantity)
-    db.session.add(stock)
-    if db.session.commit():
-        return stock
+    stockFil = Stock.query.filter_by(product_id=product_id).first()
+    if stockFil == None:
+        stock = Stock(product_id=product_id, quantity=quantity)
+        db.session.add(stock)
+        if db.session.commit():
+            return stock
 
     return None
     

@@ -151,7 +151,7 @@ def register_product_refund_in_stock(id):
         RESPONSE_BODY["data"] = update_stock(id,data["quantity"])   
         status_code = HTTPStatus.OK
         if RESPONSE_BODY["data"] == None :
-            RESPONSE_BODY["message"] = "The product stock doesn't exist"   
+            RESPONSE_BODY["message"] = "The product stock doesn't exist, use the POST method"   
         else:
             RESPONSE_BODY["message"] = \
                 "Stock for this product were updated successfully!"

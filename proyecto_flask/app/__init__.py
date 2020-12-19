@@ -32,8 +32,8 @@ def create_app(config=DevelpmentConfig):
     for url, blueprint in ACTIVE_ENDPOINTS:
         app.register_blueprint(blueprint, url_prefix=url)
 
-    #Thiss line disable csrf, I have a problem with addStock because it
-    csrf.exempt(products)
+    #This line disable csrf, I have a problem with addStock because it
+    #csrf.exempt(products)
     
     return app
 
