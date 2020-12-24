@@ -37,6 +37,8 @@ from app.products.models import (
     create_new_stock,
     update_stock
 )
+from flask_login import login_required
+
 products = Blueprint("products", __name__, url_prefix="/products")
 
 
@@ -208,6 +210,7 @@ def index_tarea3(name):
     return Response("ERROR! No se puede usar el nombre pygroup", status=400)
 
 @products.route('/create-product-form', methods=['GET', 'POST'])
+@   login_required
 def create_product_form():
     form_product = CreateProductForm()
     if request.method == 'POST' and form_product.validate():
@@ -234,6 +237,7 @@ def product_success():
     return render_template('product_success.html')
 
 @products.route('/add-product-old', methods=['GET', 'POST'])
+@login_required
 def create_product_old():
     if request.method=='POST':
         name = request.form["name"]
@@ -253,6 +257,7 @@ def create_product_old():
                             category_id=category_id)
         return redirect(url_for('products.product_success'))
     return render_template("form_product_old.html")
+
 @products.route("/catalog", methods=['GET'])
 def catalog():
     products = get_all_products()

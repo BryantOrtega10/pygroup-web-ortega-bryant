@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect,url_for
 from flask_wtf import CSRFProtect
 
 from app.auth.views import auth
@@ -24,6 +24,7 @@ def create_app(config=DevelpmentConfig):
     login_manager = LoginManager()
     login_manager.login_view = "auth.login"
     login_manager.init_app(app)
+    
     db.init_app(app)
     ma.init_app(app)    
     csrf.init_app(app)
@@ -50,7 +51,12 @@ def create_app(config=DevelpmentConfig):
         # use it in
         # the query for the user
         return User.query.get(int(user_id))
-
+    
+    
+    @login_manager.unauthorized_handler
+    def unauthorized():
+        # do stuff
+        return redirect(url_for("products.catalog"))
     
     return app
 
