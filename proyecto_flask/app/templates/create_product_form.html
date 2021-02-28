@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %} Add Product {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    {% include 'header_admin.html' %}
+    <div class="container">
+        <section class="main">
+            <h3>Catalog products</h3>
+                <form method="POST" action="/products/create-product-form">
+                    {{ form.csrf_token }}
+                    <div class="row">
+                        <div class="col-6">
+                              <div class="form-group">
+                                {{ form.name.label }}
+                                {{ form.name(class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                              <div class="form-group">
+                                  {{ form.image.label }}
+                                {{ form.image(class_="form-control") }}
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                              <div class="form-group">
+                                {{ form.price.label }}
+                                {{ form.price(class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                              <div class="form-group">
+                                  {{ form.weight.label }}
+                                {{ form.weight(class_="form-control") }}
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                              <div class="form-group">
+                                {{ form.description.label }}
+                                {{ form.description(class_="form-control") }}
+                            </div>
+                        </div>
+                        <div class="col-6">
+                              <div class="form-group">
+                                {{ form.refundable.label }}
+                                {{ form.refundable }}
+                              </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                              <div class="form-group">
+                                {{ form.category_id.label }}
+                                {{ form.category_id(class_="form-control") }}
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-primary" value="Create product">
+                    </div>
+                    <br><br>
+                </form>
+        </section>
+    </div>
+
+
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/general.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %} Invoice {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    {% include 'header.html' %}
+    <div class="container">
+        <section class="main">
+            <div class="text-center"><h1>Thanks for shopping</h1></div>
+            <h4>Invoice details</h4>
+            <br>
+            <h3>#{{ info.invoice.number| int }}</h3>
+            <div class="row">
+                <div class="col-12">
+                    {% if info.order_items %}
+                        <table class="table table-striped">
+                            <tr>
+                                <th width="200">Product</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </tr>
+                            {% for order_item,product in info.order_items %}
+                                {% if order_item.order_item_status_code == 1%}
+                                    <tr>
+                                        <td>
+                                            <b class="name_product">{{product.name}}</b>
+                                            <figure class="product_image_sm"><img src="{{ product.image }}"></figure>
+                                        </td>
+                                        <td class="align-middle">
+                                            {{order_item.order_item_quantity}}
+                                        </td>
+                                        <td class="align-middle">
+                                            ${{ '{0:,}'.format(order_item.order_item_price| int) }}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            <tr>
+                                <th colspan="2" class="text-right" >Subtotal</th>
+                                <td>${{ '{0:,}'.format(info.subtotal| int) }}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2" class="text-right" >Iva</th>
+                                <td>${{ '{0:,}'.format(info.tax| int) }}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="2" class="text-right" >Total</th>
+                                <td>${{ '{0:,}'.format(info.total| int) }}</td>
+                            </tr>
+                        </table>
+                    {% endif%}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/general.js')}}"></script>
+{% endblock %}

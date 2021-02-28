@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Create category {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    {% include 'header_admin.html' %}
+    <div class="container">
+        <section class="main">
+            <h3>Catalog products</h3><br>
+            <form method="POST" action="/products/create-category-form">
+                {{ form.csrf_token }}
+                {{ form.name.label }} {{ form.name(_class="form-control") }}
+                <input type="submit" value="Go">
+            </form>
+            <br><br><br>
+        </section>
+    </div>
+
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/general.js')}}"></script>
+{% endblock %}

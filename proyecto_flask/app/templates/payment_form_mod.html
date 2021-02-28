@@ -1,0 +1,41 @@
+{% extends "basePopUp.html" %}
+{% block id_modal %}payment{% endblock %}
+{% block title_modal %} Update payment {% endblock %}
+{% block body_modal %}
+    <form method="POST" action="{{ url_for('customer-payments.modify_payment', id=id) }}" class="formGen" autocomplete="off">
+        {{ form.csrf_token }}
+        <div class="notification is-danger d-none">
+        </div>
+        <div class="form-group">
+            {{ form.payment_method.label }}
+            {{ form.payment_method(class_="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.card_number.label }}
+            {{ form.card_number(class_="form-control") }}
+        </div>
+        <div class="row">
+            <div class="col">
+                 <div class="form-group">
+                    {{ form.payment_method_details_csv.label }}
+                    {{ form.payment_method_details_csv(class_="form-control") }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    {{ form.payment_method_details_month.label }}
+                    {{ form.payment_method_details_month(class_="form-control") }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    {{ form.payment_method_details_year.label }}
+                    {{ form.payment_method_details_year(class_="form-control") }}
+                </div>
+            </div>
+        </div>
+        <br>
+        <button class="btn btn-success" type="submit">Update payment method</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </form>
+{% endblock %}

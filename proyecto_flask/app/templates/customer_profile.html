@@ -1,0 +1,72 @@
+{% extends "basePopUp.html" %}
+{% block id_modal %}profile{% endblock %}
+{% block tamanio_modal %}modal-lg{% endblock %}
+{% block title_modal %} Profile {% endblock %}
+{% block body_modal %}
+    <form method="POST" action="{{ url_for('customers.profile') }}" class="formGen" autocomplete="off">
+        {{ form.csrf_token }}
+        <div class="notification is-danger d-none">
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    {{ form.first_name.label }}
+                    {{ form.first_name(class_="form-control") }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    {{ form.last_name.label }}
+                    {{ form.last_name(class_="form-control") }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    {{ form.email.label }}
+                    {{ form.email(class_="form-control") }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    {{ form.address.label }}
+                    {{ form.address(class_="form-control") }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    {{ form.phone_number.label }}
+                    {{ form.phone_number(class_="form-control") }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    {{ form.username.label }}
+                    {{ form.username(class_="form-control") }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                 <div class="form-group">
+                    {{ form.password.label }}
+                    {{ form.password(class_="form-control") }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    {{ form.r_password.label }}
+                    {{ form.r_password(class_="form-control") }}
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <button class="btn btn-success" type="submit">Modify Profile</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </form>
+{% endblock %}
