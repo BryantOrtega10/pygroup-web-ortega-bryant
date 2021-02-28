@@ -1,0 +1,26 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8"> <a href="{{ url_for('products.catalog') }}"><h1>Shoes Shop</h1></a></div>
+                {% if current_user.is_authenticated and current_user.rol_id==1 %}
+                    <div class="col-sm-3 text-right">
+                        <span class="nm_user">Hi <b>{{ current_user.username }}!</b></span>
+                    </div>
+                    <div class="col-sm-1">
+                        <a href="{{ url_for('auth.logout') }}" id="btn_logout" class="btn btn-outline-danger ">Logout</a>
+                    </div>
+                {% endif %}
+
+        </div>
+    </div>
+</header>
+<nav>
+    <div class="container">
+
+        <ul class="menu">
+            <li><a href="{{ url_for('products.create_product_form') }}" class="{% if request.path == url_for('products.create_product_form') %} active {% endif %}">Create products</a></li>
+            <li><a href="{{ url_for('products.create_category_form') }}" class="{% if request.path == url_for('products.create_category_form') %} active {% endif %}">Create category</a></li>
+
+        </ul>
+    </div>
+</nav>

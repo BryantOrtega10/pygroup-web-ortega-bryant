@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %} Payment methods {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    {% include 'header.html' %}
+    <div class="container">
+        <section class="main">
+            <div class="row">
+                <div class="col-8">
+                    <h3>{{ info.product.name }}</h3>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-12 col-md-7">
+                    <figure class="product_image_bg"><img src="{{ info.product.image }}"></figure>
+                </div>
+                <div class="col-12 col-md-5 info_bg">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="price {% if info.product.price > 500000 %} higher {% else %} lower {% endif %}">${{ '{0:,}'.format(info.product.price| int) }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <b>Description: </b><br>
+                            <p>{{ info.product.description }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                        {% if info.product.refundable %}
+                            <span class="refundable">Refundable!</span>
+                        {% else %}
+                            <span  class="not_refundable">Sorry not refundable</span>
+                        {% endif %}
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="row">
+                        <div class="col-12">
+                            {% if current_user.is_authenticated and current_user.rol_id==2 %}
+
+                                {% if info.stock %}
+                                    {% if info.addition_method.type == "button" %}
+                                        <a href="{{ url_for('order.add_product_to_order_active', product_id=info.product.id)}}" class="btn btn-lg btn-outline-success modify_order">Add to my order</a>
+                                    {% else %}
+                                        {% if info.addition_method.code == 2 %}
+                                             <a href="{{ url_for('order.add_product_to_order_active', product_id=info.product.id)}}" class="btn btn-lg btn-outline-success modify_order">Add to my order</a>
+                                        {% else %}
+                                        <div class="btn-group" role="group" aria-label="add_substract_products">
+                                          <a href="{{ url_for('order.substract_product_to_order_active', product_id=info.product.id)}}" class="btn btn-success modify_order">-</a>
+                                           <span class="number_of_items">{{info.addition_method.quantity}}</span>
+                                          <a {% if info.addition_method.quantity < info.stock.quantity %}  href="{{ url_for('order.add_product_to_order_active', product_id=info.product.id)}}" {% else %} href="#" {% endif %}
+                                             class="btn {% if info.addition_method.quantity < info.stock.quantity %} btn-success modify_order {% else %} btn-secondary {% endif %}">+</a>
+                                        </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% else %}
+                                    <span class="no_stock"> <i class="far fa-sad-cry"></i> Sorry we don't have stock for this product, come back later</span>
+                                {% endif %}
+                            {% else %}
+                                  <span class="no_login"> <i class="fas fa-level-up-alt"></i> You must register or log in, by clicking on the buttons at the top </span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </section>
+    </div>
+    <div class="resp_payment"></div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/general.js')}}"></script>
+{% endblock %}

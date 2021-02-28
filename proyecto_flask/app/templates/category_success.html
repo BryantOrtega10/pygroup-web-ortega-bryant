@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Category success {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    {% include 'header_admin.html' %}
+    <div class="container">
+        <section class="main">
+            <h2>Category created successfully!</h2>
+            <br>            <br>            <br>
+        </section>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/general.js')}}"></script>
+{% endblock %}

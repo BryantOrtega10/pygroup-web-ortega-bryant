@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %} Payment methods {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    {% include 'header.html' %}
+    <div class="container">
+        <section class="main">
+            <div class="row">
+                <div class="col-8">
+                    <h3>Payment methods</h3>
+                </div>
+                <div class="col-4 text-right">
+                    <a href="{{ url_for('customer-payments.add_payment') }}" class="btn btn-success payment_modal_link" id="add_payment_to_customer">Add payment</a>
+                </div>
+            </div>
+            <br><br>
+            {% if info.customer_payments %}
+                <table class="table table-striped">
+                    <tr>
+                        <th>#</th>
+                        <th>Payment method</th>
+                        <th>Card number</th>
+                        <th>Csv</th>
+                        <th>Month</th>
+                        <th>Year</th>
+                        <th></th>
+                    </tr>
+                    {% for customer_payment in info.customer_payments %}
+
+
+                        <tr>
+                            <td>{{ customer_payment.CustomerPaymentMethod.id }}</td>
+                            <td>{{ customer_payment.RefPaymentMethod.payment_method_description }}</td>
+                            <td>XXXX XXXX XXXX {{ customer_payment.CustomerPaymentMethod.card_number[-4:] }}</td>
+                            <td>{{ customer_payment.CustomerPaymentMethod.payment_method_details_csv }}</td>
+                            <td>{{ customer_payment.CustomerPaymentMethod.payment_method_details_month }}</td>
+                            <td>{{ customer_payment.CustomerPaymentMethod.payment_method_details_year }}</td>
+                            <td>
+                                <a href="{{ url_for('customer-payments.modify_payment', id=customer_payment.CustomerPaymentMethod.id)}}" class="edit payment_modal_link"><i class="fas fa-edit"></i></a>
+                                <a href="{{ url_for('customer-payments.delete_payment', id=customer_payment.CustomerPaymentMethod.id)}}" class="delete"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <span class="no_registers">There are no payment methods yet, add one!</span>
+            {% endif %}
+            <br><br>
+        </section>
+    </div>
+    <div class="resp_payment"></div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/general.js')}}"></script>
+{% endblock %}

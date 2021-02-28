@@ -1,0 +1,48 @@
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7"> <a href="{{ url_for('products.catalog') }}"><h1>Shoes Shop</h1></a></div>
+                {% if current_user.is_authenticated and current_user.rol_id==2 %}
+                    <div class="col-sm-3">
+                        <span class="nm_user">Hi <b>{{ current_user.username }}!</b></span>
+                    </div>
+                    <div class="col-sm-2 text-right">
+                        <a href="{{ url_for('order.order_active') }}" class="shopping_card"><i class="fas fa-shopping-cart"></i></a>
+                        <div class="btn-group white-color">
+                            <button class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="{{ url_for('customers.profile') }}" id="btn_perfil" class="dropdown-item">My Profile</a>
+                                <a href="{{ url_for('customer-payments.list_of_payments') }}" id="btn_payment_methods" class="dropdown-item">Payment methods</a>
+                                <a href="{{ url_for('auth.logout') }}" id="btn_logout" class="btn btn-outline-danger dropdown-item">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resp_profile"></div>
+                {% else %}
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-1">
+                        <button type="button" id="btn_login" class="btn btn-success" data-toggle="modal" data-target="#login_modal">Login</button>
+                        {% include 'login.html' %}
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" id="btn_singup" class="btn btn-outline-success" data-toggle="modal" data-target="#singup_modal">Singup</button>
+                        {% include 'signup.html' %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+<nav>
+    <div class="container">
+
+        <ul class="menu">
+            <li><a href="{{ url_for('products.catalog') }}" class="{% if request.path == url_for('products.catalog') %} active {% endif %}">Home</a></li>
+            {% for category in info.categories %}
+                <li><a href="{{ url_for('products.get_products_by_cat', id=category.id) }}" class="{% if request.path == url_for('products.get_products_by_cat', id=category.id) %} active {% endif %}">{{category.name}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,76 @@
+{% extends "basePopUp.html" %}
+{% block id_modal %}singup{% endblock %}
+{% block tamanio_modal %}modal-lg{% endblock %}
+{% block title_modal %} SingUp {% endblock %}
+{% block body_modal %}
+    <form method="POST" action="{{ url_for('auth.signup') }}" class="formGen" autocomplete="off">       
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="notification is-danger d-none">
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="sign_first_name">First Name *</label>
+                    <input class="form-control" type="text" name="first_name" id="sign_first_name" placeholder="Enter your first name" autofocus="">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="sign_last_name">Last Name *</label>
+                    <input class="form-control" type="text" name="last_name" id="sign_last_name" placeholder="Enter your last name">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="sign_email">Email address *</label>
+                    <input type="email" class="form-control" name="email" id="sign_email" placeholder="Enter your email">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="sign_address">Address</label>
+                    <input type="text" class="form-control" name="address" id="sign_address" placeholder="Enter your address">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="sign_phone_number">Phone number</label>
+                    <input type="number" class="form-control" name="phone_number" id="sign_phone_number" placeholder="Enter your phone number">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="sign_username">Username *</label>
+                    <input class="form-control" type="text" name="username" id="sign_username" placeholder="Enter your username">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                 <div class="form-group">
+                    <label for="sign_password">Password *</label>
+                    <input type="password" class="form-control" name="password" id="sign_password" placeholder="Enter your password">
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="sign_r_password">Repeat Password *</label>
+                    <input type="password" class="form-control" name="r_password" id="sign_r_password" placeholder="Repeat your password">
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <br>
+        <button class="btn btn-success" type="submit">Sign Up</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </form>
+{% endblock %}

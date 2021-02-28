@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Add a Product</title>
+        <style>
+            label{
+                width: 90px;
+                display: inline-block;
+                vertical-align: top;
+            }
+            textarea, input[type=text]{
+                width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>Add a Product</h3>
+        <form method="POST" action="/products/add-product-old">
+            <input type="hidden" name="csrf_token" id="csrf_token" value="{{ csrf_token() }}">
+            <label for="name">Name:</label> <input id="name" name="name" required="" type="text" value=""><br><br>
+            <label for="image">Image</label> <input id="image" name="image" required="" type="text" value=""><br><br>
+            <label for="price">Price</label> <input id="price" name="price" required="" type="text" value=""><br><br>
+            <label for="weight">Weight</label> <input id="weight" name="weight" required="" type="text" value=""><br><br>
+            <label for="description">Description</label> <textarea id="description" name="description" required="" rows="5"></textarea><br><br>
+            <label for="refundable">Refundable</label> <br>
+            <input checked=""  id="refundable1" name="refundable" type="radio" value="True"> <label for="refundable1">True</label> <br>
+            <input id="refundable2" name="refundable" type="radio" value=""> <label for="refundable2">False</label> <br>
+            <label for="category_id">Category Id</label> 
+            <select id="category_id" name="category_id" required="">
+                <option value="1">1</option>
+            </select>
+            <br><br>
+            <input type="submit" value="Create product">
+        </form>
+    </body>
+   
+</html>
