@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %} Catalog {% endblock %}
+{% block head %}
+    {{ super() }}
+    <style>
+        .product{
+            border-radius: 5px;
+            border: 1px solid #F0F0F0;
+            transition: all 0.5s;
+            text-align: center;
+            padding: 30px 10px;
+            margin-bottom: 40px;
+            min-height: 360px;
+        }
+        .product:hover{
+            border-color: #CCC;
+            box-shadow: 0px 0px 5px #F0F0F0;
+        }
+        .price.lower{
+            color: rgb(0, 150, 58);
+        }
+        .price.higher{
+            color: rgb(0, 132, 255);
+        }
+        .refundable{
+            color: rgb(0, 162, 255);
+        }
+        .not_refundable{
+            color: rgb(0, 0, 0);
+        }
+        .product_image{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #CCC;
+            width: 85%;
+            height: 150px;
+            overflow: hidden;
+            margin: auto;
+        }
+        .product_image img{
+            width: 100%;
+        }
+        .price {
+            font-weight: bold;
+        }
+  
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h3>Catalogo productos</h3>
+        <p>{{info.pygroup}}</p>
+        <div class="row">
+            {% for product in info.products %}
+                <div class="col-sm-4 col-lg-3">
+                    <div class="product">
+                        <div class="row"> 
+                            <div class="col-12">
+                                <h5>{{ product.name }}</h5></div>
+                            </div>
+                        <div class="row"> 
+                            <div class="col-12">
+                                <figure class="product_image"><img src="{{ product.image }}"></figure></div>
+                            </div>
+                        <div class="row"> 
+                            <div class="col-12">
+                                <span class="price {% if product.price > 500000 %} higher {% else %} lower {% endif %}">${{ '{0:,}'.format(product.price| int) }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <b>Description: </b><br>
+                                <p>{{ product.description }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                            {% if product.refundable %}
+                                <span class="refundable">Refundable!</span>
+                            {% else %}
+                                <span  class="not_refundable">Sorry not refundable</span>
+                            {% endif %} 
+                            </div>
+                        </div>
+                    </div>                    
+                </div>  
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
