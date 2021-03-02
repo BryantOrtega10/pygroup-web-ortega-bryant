@@ -13,3 +13,4 @@ class DevelpmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+    SQLALCHEMY_DATABASE_URI = "sqlite:///test_db.sqlite3"

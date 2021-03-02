@@ -2,52 +2,33 @@
 {% block title %} Catalog {% endblock %}
 {% block head %}
     {{ super() }}
-    <style>
-        .product{
-            border-radius: 5px;
-            border: 1px solid #F0F0F0;
-            transition: all 0.5s;
-            text-align: center;
-            padding: 30px 10px;
-            margin-bottom: 40px;
-            min-height: 360px;
-        }
-        .product:hover{
-            border-color: #CCC;
-            box-shadow: 0px 0px 5px #F0F0F0;
-        }
-        .price.lower{
-            color: rgb(0, 150, 58);
-        }
-        .price.higher{
-            color: rgb(0, 132, 255);
-        }
-        .refundable{
-            color: rgb(0, 162, 255);
-        }
-        .not_refundable{
-            color: rgb(0, 0, 0);
-        }
-        .product_image{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #CCC;
-            width: 85%;
-            height: 150px;
-            overflow: hidden;
-            margin: auto;
-        }
-        .product_image img{
-            width: 100%;
-        }
-        .price {
-            font-weight: bold;
-        }
-  
-    </style>
 {% endblock %}
 {% block content %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10"><h1>Shoes Shop</h1></div>
+                
+                <div class="col-sm-1">
+                    {% if current_user.is_authenticated %}
+                        Hi {{ current_user.name }}!
+                    {% else %}
+                        <button type="button" id="btn_login" class="btn btn-success" data-toggle="modal" data-target="#login_modal">Login</button>
+                        {% include 'login.html' %}
+                    {% endif %}
+                </div>
+                <div class="col-sm-1">
+                    {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.logout') }}" type="button" id="btn_logout" class="btn btn-outline-danger">Logout</a>
+                    {% else %}
+                        <button type="button" id="btn_singup" class="btn btn-outline-success" data-toggle="modal" data-target="#singup_modal">Singup</button>
+                        {% include 'signup.html' %}
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+    </header>
     <div class="container">
         <h3>Catalogo productos</h3>
         <p>{{info.pygroup}}</p>
@@ -88,4 +69,7 @@
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/general.js')}}"></script>
 {% endblock %}

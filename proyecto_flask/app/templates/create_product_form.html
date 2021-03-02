@@ -17,6 +17,7 @@
 <body>
 <form method="POST" action="/products/create-product-form">
     {{ form.csrf_token }}
+    
     {{ form.name.label }} {{ form.name(size=20) }}<br><br>
     {{ form.image.label }} {{ form.image(size=20) }}<br><br>
     {{ form.price.label }} {{ form.price(size=20) }}<br><br>
